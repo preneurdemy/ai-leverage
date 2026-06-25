@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NWAS AI Workshop Workbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal-dark:#0B3D3D;--teal:#1A6B6B;--teal-mid:#2A8A8A;
+  --teal-light:#4ECDC4;--teal-bg:#EFF7F5;--teal-border:#B2D8D0;
+  --amber:#E8A020;--amber-dk:#B45309;--amber-bg:#FEF3C7;--amber-border:#FCD34D;
+  --slate:#1E3A3A;--grey:#64748B;--grey-light:#F0F5F3;--border:#D1E8E4;
+  --white:#FFFFFF;--red:#DC2626;--red-bg:#FEE2E2;--red-border:#FECACA;
+  --green:#059669;--green-bg:#D1FAE5;--green-border:#6EE7B7;
+}
+body{font-family:'Open Sans',sans-serif;background:#F0F5F3;color:var(--slate);min-height:100vh}
+
+/* ── COVER ───────────────────────────────────────────────────────── */
+.cover{background:var(--teal-dark);padding:56px 40px 48px;text-align:center;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(78,205,196,.07);pointer-events:none}
+.cover::after{content:'';position:absolute;bottom:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.cover-org{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:30px;padding:7px 20px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;color:#A3E4D7;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+.cover-title{font-family:'Montserrat',sans-serif;font-size:clamp(28px,5vw,46px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px}
+.cover-title span{color:var(--teal-light)}
+.cover-sub{font-size:15px;color:rgba(255,255,255,.6);margin-bottom:32px;line-height:1.5}
+.cover-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.cover-pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:6px 16px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#fff}
+.cover-pill.amber{background:var(--amber);border-color:var(--amber);color:#3D1F00}
+.cover-name{font-size:13px;color:rgba(255,255,255,.4);font-style:italic}
+
+/* ── ACCESS GATE ─────────────────────────────────────────────────── */
+.gate-screen{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:32px 20px;
+  background:
+    radial-gradient(ellipse 800px 500px at 50% -10%, rgba(78,205,196,.08), transparent 60%),
+    #F0F5F3;
+}
+.gate-card{
+  max-width:520px;width:100%;
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 30px 70px -20px rgba(11,61,61,.22);
+}
+.gate-hero{
+  background:var(--teal-dark);
+  padding:40px 36px 32px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.gate-hero::before{content:'';position:absolute;top:-70px;right:-70px;width:240px;height:240px;border-radius:50%;background:rgba(78,205,196,.08)}
+.gate-hero::after{content:'';position:absolute;bottom:-50px;left:-50px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.04)}
+.gate-icon{font-size:38px;margin-bottom:14px;position:relative;z-index:2}
+.gate-eyebrow{
+  display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  border-radius:30px;padding:6px 16px;font-family:'Montserrat',sans-serif;font-size:9.5px;
+  font-weight:800;color:#A3E4D7;letter-spacing:1.6px;text-transform:uppercase;
+  margin-bottom:16px;position:relative;z-index:2;
+}
+.gate-title{
+  font-family:'Montserrat',sans-serif;font-size:clamp(22px,4vw,28px);font-weight:900;
+  color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:2;
+}
+.gate-title span{color:var(--teal-light)}
+.gate-sub{
+  font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.55;
+  position:relative;z-index:2;max-width:380px;margin:0 auto;
+}
+.gate-whats-inside{
+  padding:24px 36px 8px;
+}
+.gate-whats-inside-label{
+  font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;color:var(--teal);
+  letter-spacing:1.4px;text-transform:uppercase;margin-bottom:14px;text-align:center;
+}
+.gate-feature-list{display:flex;flex-direction:column;gap:9px;margin-bottom:6px}
+.gate-feature{display:flex;align-items:flex-start;gap:10px}
+.gate-feature-icon{
+  width:20px;height:20px;border-radius:50%;background:var(--teal-bg);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+  font-size:11px;
+}
+.gate-feature span{font-size:12.5px;color:var(--slate);line-height:1.4}
+.gate-form-wrap{
+  padding:16px 28px 32px;
+  min-height:140px;
+}
+.gate-loading{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:32px 16px;color:var(--grey);font-size:12.5px;text-align:center;
+}
+.gate-spinner{
+  width:26px;height:26px;border:3px solid var(--border);border-top-color:var(--teal);
+  border-radius:50%;animation:gateSpin .8s linear infinite;
+}
+@keyframes gateSpin{to{transform:rotate(360deg)}}
+.gate-privacy-note{
+  text-align:center;font-size:10.5px;color:var(--grey);padding:0 28px 28px;line-height:1.5;
+}
+
+/* ── WORKBOOK CONTENT (hidden until form is submitted) ─────────────── */
+#workbookContent{display:none}
+
+/* ── NAV TABS ────────────────────────────────────────────────────── */
+.tab-bar{background:var(--teal-dark);padding:0 24px;display:flex;gap:4px;overflow-x:auto;border-top:1px solid rgba(255,255,255,.08)}
+.tab-bar::-webkit-scrollbar{height:3px}.tab-bar::-webkit-scrollbar-thumb{background:var(--teal-light)}
+.tab-btn{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);border:none;background:none;padding:14px 18px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;letter-spacing:.5px;text-transform:uppercase}
+.tab-btn:hover{color:rgba(255,255,255,.85)}
+.tab-btn.active{color:var(--teal-light);border-bottom-color:var(--teal-light)}
+
+/* ── PROGRESS BAR ────────────────────────────────────────────────── */
+.progress-wrap{background:var(--teal-dark);padding:10px 24px 12px}
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.progress-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:#A3E4D7;text-transform:uppercase;letter-spacing:1px}
+.progress-pct{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:var(--teal-light)}
+.progress-track{height:5px;background:rgba(255,255,255,.1);border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-light));border-radius:10px;transition:width .5s ease;width:0%}
+
+/* ── PAGE LAYOUT ─────────────────────────────────────────────────── */
+.page{display:none;max-width:820px;margin:0 auto;padding:32px 20px 60px}
+.page.active{display:block}
+
+/* ── SECTION HEADERS ─────────────────────────────────────────────── */
+.section-banner{background:var(--teal-dark);border-radius:14px;padding:24px 28px;margin-bottom:28px;position:relative;overflow:hidden}
+.section-banner::after{content:'';position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:rgba(78,205,196,.08)}
+.section-banner-eyebrow{font-family:'Montserrat',sans-serif;font-size:9.5px;font-weight:800;color:#A3E4D7;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.section-banner-title{font-family:'Montserrat',sans-serif;font-size:clamp(20px,4vw,28px);font-weight:900;color:#fff;margin-bottom:6px}
+.section-banner-title span{color:var(--teal-light)}
+.section-banner-sub{font-size:13px;color:rgba(255,255,255,.6);line-height:1.5}
+
+/* ── CARDS ───────────────────────────────────────────────────────── */
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 2px 16px rgba(11,61,61,.06)}
+.card-title{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;color:var(--teal-dark);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.card-title .emoji{font-size:18px}
+.card-sub{font-size:12px;color:var(--grey);margin-bottom:16px;line-height:1.5}
+
+/* ── CALLOUTS ────────────────────────────────────────────────────── */
+.callout{border-radius:10px;padding:14px 16px;display:flex;gap:12px;margin-bottom:16px;font-size:12.5px;line-height:1.55;align-items:flex-start}
+.callout.teal{background:var(--teal-bg);border:1px solid var(--teal-border);color:var(--teal-dark)}
+.callout.amber{background:var(--amber-bg);border:1px solid var(--amber-border);color:#5C3A00}
+.callout.red{background:var(--red-bg);border:1px solid var(--red-border);color:#7F1D1D}
+.callout.green{background:var(--green-bg);border:1px solid var(--green-border);color:#14532D}
+.callout-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+
+/* ── FORM ELEMENTS ───────────────────────────────────────────────── */
+.field-label{display:block;font-family:'Montserrat',sans-serif;font-size:10.5px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px}
+.field-hint{font-size:11px;color:var(--grey);margin-top:5px;line-height:1.4}
+textarea,input[type="text"]{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:9px;font-family:'Open Sans',sans-serif;font-size:13.5px;color:var(--slate);background:#fff;resize:vertical;outline:none;transition:border-color .2s,box-shadow .2s;line-height:1.55}
+textarea:focus,input[type="text"]:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,107,107,.1)}
+textarea{min-height:90px}
+.field-full{margin-bottom:18px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+@media(max-width:560px){.field-row{grid-template-columns:1fr}}
+
+/* ── CHOICE ITEMS ─────────────────────────────────────────────────── */
+.choice-group{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+.choice-group.inline{flex-direction:row;flex-wrap:wrap;gap:7px}
+.choice-item input{position:absolute;opacity:0;width:0;height:0}
+.choice-item label{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;font-size:13px;color:var(--slate);transition:border-color .2s,background .2s;line-height:1.4;user-select:none}
+.choice-item label:hover{border-color:var(--teal);background:var(--teal-bg)}
+.choice-item input:checked + label{border-color:var(--teal);background:var(--teal-bg);color:var(--teal-dark);font-weight:600}
+.choice-dot{width:17px;height:17px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.choice-item input:checked + label .choice-dot{background:var(--teal);border-color:var(--teal)}
+.choice-item input:checked + label .choice-dot::after{content:'';width:7px;height:7px;border-radius:50%;background:#fff;display:block}
+.choice-check{width:17px;height:17px;border:2px solid var(--border);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.choice-item input:checked + label .choice-check{background:var(--teal);border-color:var(--teal)}
+.choice-item input:checked + label .choice-check::after{content:'';width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block}
+
+/* ── PROMPT BOXES ────────────────────────────────────────────────── */
+.prompt-box{margin-bottom:20px;border-radius:10px;overflow:hidden}
+.prompt-label{background:var(--teal-dark);padding:10px 16px;font-family:'Montserrat',sans-serif;font-size:9.5px;font-weight:800;color:#A3E4D7;letter-spacing:1.2px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+.prompt-body{background:#111E1E;padding:16px 18px;position:relative}
+.prompt-text{font-family:'Courier New',monospace;font-size:12.5px;color:#A3E4D7;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+.copy-btn{background:var(--teal);border:none;border-radius:6px;padding:5px 12px;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;color:#fff;cursor:pointer;transition:all .2s;letter-spacing:.5px;white-space:nowrap}
+.copy-btn:hover{background:var(--teal-mid)}
+.copy-btn.copied{background:var(--green);color:#fff}
+.prompt-note{font-size:11px;color:var(--grey);font-style:italic;margin-top:8px;line-height:1.4}
+
+/* ── COMPARISON TABLE ────────────────────────────────────────────── */
+.compare-table{width:100%;border-collapse:collapse;margin-bottom:18px;border-radius:10px;overflow:hidden}
+.compare-table th{padding:11px 14px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;text-align:left}
+.compare-table th.red-h{background:#7F1D1D;color:#FEE2E2}
+.compare-table th.green-h{background:#14532D;color:#D1FAE5}
+.compare-table td{padding:10px 14px;font-size:12.5px;line-height:1.45;border-bottom:1px solid #E2EEE8;vertical-align:top}
+.compare-table td.red-td{background:#FEF2F2;color:#7F1D1D}
+.compare-table td.green-td{background:#F0FDF4;color:#14532D}
+.compare-table tr:last-child td{border-bottom:none}
+
+/* ── SCALE RATING ────────────────────────────────────────────────── */
+.scale-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.scale-label{font-size:12.5px;color:var(--grey);width:140px;flex-shrink:0;line-height:1.3}
+.scale-opts{display:flex;gap:6px;flex:1}
+.scale-opt input{position:absolute;opacity:0}
+.scale-opt label{width:36px;height:36px;border:1.5px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:var(--grey);cursor:pointer;transition:all .15s}
+.scale-opt label:hover{border-color:var(--teal);color:var(--teal)}
+.scale-opt input:checked + label{background:var(--teal);border-color:var(--teal);color:#fff}
+
+/* ── REFLECTION BOXES ────────────────────────────────────────────── */
+.reflection-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:18px}
+@media(max-width:600px){.reflection-grid{grid-template-columns:1fr}}
+.reflection-box{background:var(--teal-bg);border:1.5px solid var(--teal-border);border-radius:10px;padding:14px}
+.reflection-num{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;color:var(--teal-border);margin-bottom:4px}
+.reflection-q{font-size:12px;font-weight:600;color:var(--teal-dark);margin-bottom:8px;line-height:1.4}
+
+/* ── BADGE / PILL ────────────────────────────────────────────────── */
+.badge{display:inline-block;border-radius:20px;padding:4px 12px;font-family:'Montserrat',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.8px}
+.badge.teal{background:var(--teal-dark);color:#A3E4D7}
+.badge.amber{background:var(--amber);color:#3D1F00}
+.badge.green{background:var(--green);color:#fff}
+.badge.red{background:var(--red);color:#fff}
+
+/* ── DIVIDER ─────────────────────────────────────────────────────── */
+.divider{height:1px;background:var(--border);margin:20px 0}
+
+/* ── STEP COUNTER ────────────────────────────────────────────────── */
+.step-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--teal-dark);color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-content{flex:1}
+.step-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:3px}
+.step-desc{font-size:12.5px;color:var(--grey);line-height:1.5}
+
+/* ── COMMIT CARD ─────────────────────────────────────────────────── */
+.commit-card{background:var(--teal-dark);border-radius:14px;padding:24px 26px;margin-bottom:20px}
+.commit-card-title{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;color:var(--teal-light);margin-bottom:16px}
+.commit-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.commit-item:last-child{margin-bottom:0}
+.commit-check{width:20px;height:20px;border:2px solid rgba(255,255,255,.25);border-radius:5px;flex-shrink:0;margin-top:2px;cursor:pointer;accent-color:var(--teal-light)}
+.commit-label{font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.5}
+.commit-input{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 13px;width:100%;font-family:'Open Sans',sans-serif;font-size:13px;color:#fff;outline:none;margin-top:8px;transition:border-color .2s}
+.commit-input::placeholder{color:rgba(255,255,255,.35)}
+.commit-input:focus{border-color:var(--teal-light)}
+
+/* ── NAV BUTTONS ─────────────────────────────────────────────────── */
+.page-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:24px;border-top:1px solid var(--border)}
+.btn{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;border:none;border-radius:10px;padding:12px 24px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
+.btn-back{background:#F1F5F3;color:var(--teal);border:1.5px solid var(--border)}
+.btn-back:hover{background:var(--teal-bg);border-color:var(--teal)}
+.btn-next{background:var(--teal-dark);color:#fff}
+.btn-next:hover{background:var(--teal);transform:translateY(-1px);box-shadow:0 4px 16px rgba(11,61,61,.22)}
+.btn-save{background:var(--amber);color:#3D1F00}
+.btn-save:hover{background:#D4911A;transform:translateY(-1px)}
+
+/* ── ACCORDION ───────────────────────────────────────────────────── */
+.accordion{border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.accordion-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#fff;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:var(--teal-dark);transition:background .2s}
+.accordion-header:hover{background:var(--teal-bg)}
+.accordion-arrow{font-size:11px;color:var(--teal);transition:transform .3s}
+.accordion-body{display:none;padding:14px 16px;background:var(--grey-light);border-top:1px solid var(--border);font-size:12.5px;line-height:1.6;color:var(--slate)}
+.accordion.open .accordion-body{display:block}
+.accordion.open .accordion-arrow{transform:rotate(180deg)}
+
+/* ── SAVE BAR ────────────────────────────────────────────────────── */
+.save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--teal-dark);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;z-index:100;border-top:1px solid rgba(255,255,255,.1)}
+.save-bar-text{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.8px;text-transform:uppercase}
+.save-bar-right{display:flex;gap:10px;align-items:center}
+
+/* ── CERTIFICATE ─────────────────────────────────────────────────── */
+.certificate{background:var(--teal-dark);border-radius:16px;padding:36px;text-align:center;margin-bottom:20px;position:relative;overflow:hidden}
+.certificate::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:rgba(78,205,196,.08)}
+.certificate::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04)}
+.cert-org{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;color:#A3E4D7;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.cert-title{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:#fff;margin-bottom:6px}
+.cert-sub{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:20px}
+.cert-name-wrap{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:14px 20px;margin:0 auto 16px;max-width:380px}
+.cert-name-label{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.cert-name-input{background:none;border:none;outline:none;font-family:'Montserrat',sans-serif;font-size:20px;font-weight:700;color:var(--teal-light);text-align:center;width:100%}
+.cert-name-input::placeholder{color:rgba(255,255,255,.2);font-size:16px}
+.cert-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.cert-footer{font-size:11px;color:rgba(255,255,255,.35);line-height:1.5}
+
+/* ── TIMER ───────────────────────────────────────────────────────── */
+.timer-wrap{background:var(--teal-dark);border-radius:12px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.timer-display{font-family:'Montserrat',sans-serif;font-size:36px;font-weight:900;color:var(--teal-light);letter-spacing:2px;min-width:100px}
+.timer-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.timer-name{font-size:14px;font-weight:600;color:#fff}
+.timer-btns{display:flex;gap:8px}
+.timer-btn{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;border:none;border-radius:8px;padding:9px 16px;cursor:pointer;transition:all .2s}
+.timer-btn.start{background:var(--teal-light);color:var(--teal-dark)}
+.timer-btn.reset{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.timer-btn:hover{transform:translateY(-1px)}
+
+/* ── TOOL CARDS ──────────────────────────────────────────────────── */
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+@media(max-width:540px){.tool-grid{grid-template-columns:1fr}}
+.tool-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px;text-align:center;transition:border-color .2s,box-shadow .2s}
+.tool-card:hover{border-color:var(--teal);box-shadow:0 4px 16px rgba(11,61,61,.1)}
+.tool-card-icon{font-size:36px;margin-bottom:10px}
+.tool-card-name{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;color:var(--teal-dark);margin-bottom:4px}
+.tool-card-url{font-size:11px;color:var(--teal);font-family:'Courier New',monospace;margin-bottom:8px}
+.tool-card-desc{font-size:11.5px;color:var(--grey);line-height:1.45}
+
+/* ── CHECK ITEMS ─────────────────────────────────────────────────── */
+.checklist{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:#fff;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;transition:all .2s}
+.check-item:hover{border-color:var(--teal)}
+.check-item.checked{background:var(--teal-bg);border-color:var(--teal)}
+.check-box{width:20px;height:20px;border:2px solid var(--border);border-radius:5px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s;cursor:pointer;accent-color:var(--teal)}
+.check-item.checked .check-box{background:var(--teal);border-color:var(--teal)}
+.check-item.checked .check-box::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
+.check-text{font-size:13px;color:var(--slate);line-height:1.4}
+.check-item.checked .check-text{color:var(--teal-dark);font-weight:600}
+
+/* ── TOAST ───────────────────────────────────────────────────────── */
+.toast{position:fixed;top:20px;right:20px;background:var(--teal-dark);color:#fff;padding:12px 20px;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;z-index:999;opacity:0;transform:translateY(-10px);transition:all .3s;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* ── PRINT ───────────────────────────────────────────────────────── */
+@media print{
+  .tab-bar,.progress-wrap,.save-bar,.page-nav,.timer-btns,.copy-btn{display:none!important}
+  .page{display:block!important;max-width:100%}
+  .card{box-shadow:none;border:1px solid #ccc}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     ACCESS GATE — shown first. Workbook unlocks after the
+     lead-capture form below is submitted.
+═══════════════════════════════════════════════════════ -->
+<div class="gate-screen" id="gateScreen">
+  <div class="gate-card">
+    <div class="gate-hero">
+      <div class="gate-eyebrow">Workshop Workbook</div>
+      <div class="gate-icon">📘</div>
+      <div class="gate-title">Your Workbook is<br><span>One Step Away</span></div>
+      <div class="gate-sub">Pop your name and email below and your full interactive workbook unlocks instantly.</div>
+    </div>
+
+    <div class="gate-whats-inside">
+      <div class="gate-whats-inside-label">What's inside</div>
+      <div class="gate-feature-list">
+        <div class="gate-feature"><div class="gate-feature-icon">🔒</div><span>GDPR-safe AI rules, explained simply</span></div>
+        <div class="gate-feature"><div class="gate-feature-icon">📚</div><span>NotebookLM &amp; Claude AI walkthroughs with copy-ready prompts</span></div>
+        <div class="gate-feature"><div class="gate-feature-icon">🎯</div><span>Your personal 72-hour action plan</span></div>
+        <div class="gate-feature"><div class="gate-feature-icon">🏅</div><span>A certificate of completion you can keep</span></div>
+      </div>
+    </div>
+
+    <div class="gate-form-wrap" id="gateFormWrap">
+      <div class="gate-loading" id="gateLoadingMsg">
+        <div class="gate-spinner"></div>
+        <span>Loading...</span>
+      </div>
+    </div>
+
+    <div class="gate-privacy-note">We'll never spam you. Your email is just so we can send you future workshop updates and resources.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     WORKBOOK CONTENT — hidden until the form above is submitted
+═══════════════════════════════════════════════════════ -->
+<div id="workbookContent">
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Copied to clipboard!</div>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-org">North Wales Africa Society</div>
+  <div class="cover-title">AI Mastery for<br><span>Care Workers</span></div>
+  <div class="cover-sub">Your Personal Workshop Workbook</div>
+  <div class="cover-pills">
+    <div class="cover-pill">📅 27 June 2026</div>
+    <div class="cover-pill">🕙 10:00 – 12:30</div>
+    <div class="cover-pill">💻 Hybrid</div>
+    <div class="cover-pill amber">🎟 FREE</div>
+  </div>
+  <div class="cover-name">Facilitated by Manuel Chinyereuba &nbsp;·&nbsp; AI Leverager</div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showPage(0)">🏠 Welcome</button>
+  <button class="tab-btn" onclick="showPage(1)">🔒 GDPR Rules</button>
+  <button class="tab-btn" onclick="showPage(2)">📚 NotebookLM</button>
+  <button class="tab-btn" onclick="showPage(3)">🤖 Claude AI</button>
+  <button class="tab-btn" onclick="showPage(4)">📋 Prompt Library</button>
+  <button class="tab-btn" onclick="showPage(5)">🎯 My Action Plan</button>
+  <button class="tab-btn" onclick="showPage(6)">🏅 Certificate</button>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-top">
+    <span class="progress-label" id="prog-label">Section 1 of 7 — Welcome</span>
+    <span class="progress-pct" id="prog-pct">14%</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:14%"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 0 — WELCOME
+═══════════════════════════════════════════════════════════ -->
+<div class="page active" id="page-0">
+  <div class="section-banner">
+    <div class="section-banner-eyebrow">Section 1</div>
+    <div class="section-banner-title">👋 Welcome to Your <span>AI Workshop</span></div>
+    <div class="section-banner-sub">This workbook is your companion for today. Use it to follow the session, practise prompts, record your notes, and build your personal AI action plan.</div>
+  </div>
+
+  <!-- What you will learn -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🎯</span> What You Will Learn Today</div>
+    <div class="card-sub">Four outcomes you will walk away with — tick each as we cover it</div>
+    <div class="checklist" id="outcomes-list">
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Write shift reports in under 5 minutes</strong> — using Claude AI to turn your rough notes into a professional, CQC-standard document</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Query your workplace policies in plain English</strong> — using Google NotebookLM as your 24/7 policy coach</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Build your own AI personal assistant</strong> — tailored to your specific care role and working style</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Use AI safely within GDPR rules</strong> — knowing exactly where the boundaries are and how to stay on the right side of them</div></div>
+    </div>
+  </div>
+
+  <!-- Tools today -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🛠️</span> Tools We Are Using Today</div>
+    <div class="card-sub">Both are free. No paid account needed. Open these on your phone or laptop now.</div>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-card-icon">📓</div>
+        <div class="tool-card-name">Google NotebookLM</div>
+        <div class="tool-card-url">notebooklm.google.com</div>
+        <div class="tool-card-desc">Upload your policy documents and ask them questions in plain English. Only uses what you upload — no guesswork.</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-card-icon">🤖</div>
+        <div class="tool-card-name">Claude AI</div>
+        <div class="tool-card-url">claude.ai</div>
+        <div class="tool-card-desc">Your AI writing and thinking partner. We use this for building your fictional persona and writing professional reports.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reality check -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🪞</span> Reality Check — Before We Begin</div>
+    <div class="card-sub">Answer these honestly — there are no wrong answers. This shapes how Manuel pitches the session.</div>
+
+    <div class="field-full">
+      <label class="field-label">Where is your time slipping away the most right now?</label>
+      <div class="choice-group">
+        <div class="choice-item"><input type="radio" name="time_slip" id="ts1"><label for="ts1"><span class="choice-dot"></span>At work — too much time on documentation and admin</label></div>
+        <div class="choice-item"><input type="radio" name="time_slip" id="ts2"><label for="ts2"><span class="choice-dot"></span>At home — work follows me and I cannot switch off</label></div>
+        <div class="choice-item"><input type="radio" name="time_slip" id="ts3"><label for="ts3"><span class="choice-dot"></span>Within myself — mental exhaustion and overwhelm</label></div>
+        <div class="choice-item"><input type="radio" name="time_slip" id="ts4"><label for="ts4"><span class="choice-dot"></span>All of the above — it all feels connected</label></div>
+      </div>
+    </div>
+
+    <div class="field-full">
+      <label class="field-label">If you suddenly gained 10 extra hours a week, what would you do first?</label>
+      <textarea placeholder="Write freely — family, rest, learning, side project, anything..."></textarea>
+    </div>
+
+    <div class="field-full">
+      <label class="field-label">The ONE thing you most want to walk away with today is:</label>
+      <textarea placeholder="Be as specific as you can..." style="min-height:70px"></textarea>
+    </div>
+  </div>
+
+  <!-- Icebreaker -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🗣️</span> Quick Icebreaker</div>
+    <div class="card-sub">Share this with the group when Manuel asks</div>
+    <div class="field-full">
+      <label class="field-label">My name is:</label>
+      <input type="text" placeholder="Your name" id="participant-name">
+    </div>
+    <div class="field-full">
+      <label class="field-label">I work as:</label>
+      <input type="text" placeholder="Your job title and setting">
+    </div>
+    <div class="field-full">
+      <label class="field-label">My current relationship with AI in one word:</label>
+      <div class="choice-group inline">
+        <div class="choice-item"><input type="radio" name="ai_word" id="aw1"><label for="aw1"><span class="choice-dot"></span>🙅 Stranger</label></div>
+        <div class="choice-item"><input type="radio" name="ai_word" id="aw2"><label for="aw2"><span class="choice-dot"></span>👀 Curious</label></div>
+        <div class="choice-item"><input type="radio" name="ai_word" id="aw3"><label for="aw3"><span class="choice-dot"></span>🧪 Experimenting</label></div>
+        <div class="choice-item"><input type="radio" name="ai_word" id="aw4"><label for="aw4"><span class="choice-dot"></span>⚡ Regular</label></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <div></div>
+    <button class="btn btn-next" onclick="showPage(1)">Next: GDPR Rules →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 1 — GDPR RULES
+═══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-1">
+  <div class="section-banner">
+    <div class="section-banner-eyebrow">Section 2</div>
+    <div class="section-banner-title">🔒 GDPR Ground Rules</div>
+    <div class="section-banner-sub">The most important 5 minutes of the workshop. These rules protect you, your service users, and your employer.</div>
+  </div>
+
+  <div class="callout amber">
+    <span class="callout-icon">⚠️</span>
+    <div><strong>This is not about restricting you.</strong> It is about making sure you can use AI confidently without putting yourself at risk. Learn the boundaries once — then work freely within them.</div>
+  </div>
+
+  <!-- The core ruling -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">⚖️</span> The Core Ruling — Understand This First</div>
+    <div class="card-sub">Under UK GDPR, a pseudonym does NOT remove the legal risk. Even if you rename John as Sam, the combination of age + diagnosis + behaviours + incidents makes an individual identifiable.</div>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th class="red-h">❌ NEVER — Even with a Fake Name</th>
+          <th class="green-h">✅ ALWAYS SAFE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="red-td">Type a real service user's name into any public AI tool</td>
+          <td class="green-td">Build a <strong>Fictional Support Persona</strong> with characteristics only — no real incidents</td>
+        </tr>
+        <tr>
+          <td class="red-td">Describe a real incident with real dates, locations, or details</td>
+          <td class="green-td">Upload your <strong>policy documents</strong> — these are organisational, not personal data</td>
+        </tr>
+        <tr>
+          <td class="red-td">Feed real behavioural patterns of a specific person into AI</td>
+          <td class="green-td">Use AI to <strong>practise</strong> writing with fictional scenarios only</td>
+        </tr>
+        <tr>
+          <td class="red-td">Use 'Sam instead of John' — the GDPR risk remains</td>
+          <td class="green-td">Write the <strong>real report from memory</strong> in your employer's secure system</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- The 5 rules -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">📋</span> The 5 Rules — Say These Out Loud</div>
+    <div class="card-sub">Read each rule and tick it once you have understood it</div>
+    <div class="checklist">
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Rule 1:</strong> Never type the real name of a service user into any public AI tool. Ever. Use a fictional name for practice only.</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Rule 2:</strong> Never describe a real incident with real details in an AI tool. Practise with fictional scenarios only.</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Rule 3:</strong> Use AI to <em>learn how</em> to write reports. Write the actual report from memory in your employer's secure system.</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Rule 4:</strong> NotebookLM is safe for your policy documents — these are organisational documents, not personal data.</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Rule 5:</strong> If you are ever unsure whether something is safe to share with an AI tool — assume it is not. Check with your manager first.</div></div>
+    </div>
+  </div>
+
+  <!-- The safe workflow -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🔄</span> The Safe Workflow — Memorise This</div>
+    <div class="card-sub">AI is your training ground — not your filing cabinet</div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-content"><div class="step-title">Practise with AI using fictional scenarios</div><div class="step-desc">Build your fictional persona. Use it for all report writing practice. No real names, no real incidents.</div></div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-content"><div class="step-title">Build the skill</div><div class="step-desc">Learn the structure, the language, the format. Get comfortable with how professional reports read.</div></div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-content"><div class="step-title">Apply it mentally in real situations</div><div class="step-desc">After your real shift, mentally apply what you have practised to the real events you witnessed.</div></div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-content"><div class="step-title">Write the real report in your employer's secure system</div><div class="step-desc">Type it yourself, in your organisation's system, using the structure and language AI helped you learn.</div></div></div>
+
+    <div class="callout green" style="margin-top:8px">
+      <span class="callout-icon">💡</span>
+      <div>The quality of your reports improves. The speed increases. Your confidence grows. And your service users stay protected. Everyone wins.</div>
+    </div>
+  </div>
+
+  <!-- Reflection -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">✏️</span> Quick Reflection</div>
+    <div class="field-full">
+      <label class="field-label">Before today, were you aware of these GDPR boundaries around AI?</label>
+      <div class="choice-group inline">
+        <div class="choice-item"><input type="radio" name="gdpr_aware" id="ga1"><label for="ga1"><span class="choice-dot"></span>Not at all</label></div>
+        <div class="choice-item"><input type="radio" name="gdpr_aware" id="ga2"><label for="ga2"><span class="choice-dot"></span>Vaguely</label></div>
+        <div class="choice-item"><input type="radio" name="gdpr_aware" id="ga3"><label for="ga3"><span class="choice-dot"></span>Mostly yes</label></div>
+        <div class="choice-item"><input type="radio" name="gdpr_aware" id="ga4"><label for="ga4"><span class="choice-dot"></span>Fully aware</label></div>
+      </div>
+    </div>
+    <div class="field-full">
+      <label class="field-label">What does this change about how you have been (or planned to) use AI at work?</label>
+      <textarea placeholder="Write your honest thoughts here..."></textarea>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <button class="btn btn-back" onclick="showPage(0)">← Back</button>
+    <button class="btn btn-next" onclick="showPage(2)">Next: NotebookLM →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 2 — NOTEBOOKLM
+═══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-2">
+  <div class="section-banner">
+    <div class="section-banner-eyebrow">Section 3 — Module 1</div>
+    <div class="section-banner-title">📚 Google <span>NotebookLM</span></div>
+    <div class="section-banner-sub">Your 24/7 policy coach. Upload any document, ask any question, get answers cited from your own text.</div>
+  </div>
+
+  <!-- What it is -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🧠</span> What Makes NotebookLM Different</div>
+    <div class="checklist">
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Only uses YOUR documents</strong> — no hallucination from general knowledge. Every answer comes from what you uploaded.</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Shows you the source</strong> — click any response and it highlights exactly where in your document the answer came from.</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Conversational</strong> — ask follow-up questions naturally, like talking to a well-read colleague.</div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Completely free</strong> — go to notebooklm.google.com right now and sign in with your Google account.</div></div>
+    </div>
+  </div>
+
+  <!-- Step by step -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">👣</span> How to Set It Up — Follow Along Live</div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-content"><div class="step-title">Go to notebooklm.google.com</div><div class="step-desc">Sign in with your Google account. If you don't have one, you can create one free in 2 minutes.</div></div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-content"><div class="step-title">Click "New Notebook"</div><div class="step-desc">Title it "My Policy Assistant" — you will keep adding documents to this over time.</div></div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-content"><div class="step-title">Upload your policy document</div><div class="step-desc">PDF or Word document. Even a 2-page excerpt from your employee handbook works perfectly.</div></div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-content"><div class="step-title">Wait for it to process</div><div class="step-desc">Usually 15–30 seconds. You will see a confirmation message when it is ready.</div></div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-content"><div class="step-title">Ask your first question</div><div class="step-desc">Use Prompt 1 below — copy it exactly and paste it into the chat box.</div></div></div>
+
+    <div class="field-full" style="margin-top:10px">
+      <label class="field-label">My notes from the setup (any issues, tips, login details to remember):</label>
+      <textarea placeholder="Write anything useful here..." style="min-height:70px"></textarea>
+    </div>
+  </div>
+
+  <!-- Demo prompts -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">💬</span> Live Demo Prompts — Copy & Try Now</div>
+    <div class="card-sub">Follow along with Manuel. These prompts work with any policy document.</div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">
+        PROMPT 1 — Policy Overview
+        <button class="copy-btn" onclick="copyPrompt(this, 'p1')">Copy</button>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text" id="p1">You are my personal policy coach. I have uploaded my workplace policy document. Please explain to me in simple, clear language:
+
+1. What are my 3 most important responsibilities under this policy?
+2. What should I do immediately if I think a service user is at risk?
+3. What am I NOT allowed to do, even if a service user or family member asks me to?
+
+Use plain English. No jargon. Speak to me as if I am brand new to this role and want to do the right thing.</div>
+      </div>
+      <div class="prompt-note">📌 Watch the citation panel on the right — it shows exactly where each answer comes from in your document.</div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">
+        PROMPT 2 — Scenario Query
+        <button class="copy-btn" onclick="copyPrompt(this, 'p2')">Copy</button>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text" id="p2">I had a situation today where a service user's family member arrived unannounced and asked to take them out without a pre-arranged plan. What does my policy say I should do in this situation? Give me a step-by-step response I can follow right now.</div>
+      </div>
+      <div class="prompt-note">📌 Notice how the follow-up question feels like a natural conversation. You can keep asking until you fully understand.</div>
+    </div>
+
+    <div class="callout teal">
+      <span class="callout-icon">🎯</span>
+      <div><strong>Your turn:</strong> Ask NotebookLM ONE question that has genuinely confused you in your job. Type it in the box below, then copy and paste it into NotebookLM.</div>
+    </div>
+    <div class="field-full">
+      <label class="field-label">My question for NotebookLM:</label>
+      <textarea placeholder="Type the question you've always wanted answered about your policies..."></textarea>
+    </div>
+    <div class="field-full">
+      <label class="field-label">What did NotebookLM say? (summarise the answer here):</label>
+      <textarea placeholder="Write a brief summary of the response..."></textarea>
+    </div>
+  </div>
+
+  <!-- Practice timer -->
+  <div class="timer-wrap">
+    <div>
+      <div class="timer-label">Practice Timer</div>
+      <div class="timer-name">NotebookLM — Try Your Own Question</div>
+    </div>
+    <div class="timer-display" id="timer1-display">10:00</div>
+    <div class="timer-btns">
+      <button class="timer-btn start" onclick="startTimer('timer1',600)">▶ Start</button>
+      <button class="timer-btn reset" onclick="resetTimer('timer1',600)">↺ Reset</button>
+    </div>
+  </div>
+
+  <!-- What can you upload -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">📁</span> Documents You Can Upload to NotebookLM</div>
+    <div class="card-sub">All of these are organisational documents — they are GDPR-safe to upload</div>
+    <div class="choice-group">
+      <div class="choice-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Employee handbook or contract of employment</div></div>
+      <div class="choice-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Safeguarding policy and procedures</div></div>
+      <div class="choice-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Medication administration guidance</div></div>
+      <div class="choice-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Manual handling policy</div></div>
+      <div class="choice-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Mental Capacity Act guidance</div></div>
+      <div class="choice-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">CQC Key Lines of Enquiry (free at cqc.org.uk)</div></div>
+      <div class="choice-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Code of Conduct for Healthcare Support Workers (free at skillsforcare.org.uk)</div></div>
+    </div>
+    <div class="field-full" style="margin-top:4px">
+      <label class="field-label">The document I plan to upload first when I get back to work:</label>
+      <input type="text" placeholder="Name the document...">
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <button class="btn btn-back" onclick="showPage(1)">← Back</button>
+    <button class="btn btn-next" onclick="showPage(3)">Next: Claude AI →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 3 — CLAUDE AI
+═══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-3">
+  <div class="section-banner">
+    <div class="section-banner-eyebrow">Section 4 — Module 2</div>
+    <div class="section-banner-title">🤖 Claude AI — <span>Report Writing</span></div>
+    <div class="section-banner-sub">The 3-part prompt formula. The fictional persona. The master report prompt. Everything you need to write professional reports in under 5 minutes.</div>
+  </div>
+
+  <!-- The formula -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🧩</span> The 3-Part Prompt Formula</div>
+    <div class="card-sub">Every powerful AI prompt has the same three ingredients</div>
+    <div class="step-row">
+      <div class="step-num" style="background:#0B3D3D">1</div>
+      <div class="step-content">
+        <div class="step-title">The ROLE — who should AI act as?</div>
+        <div class="step-desc">"You are a professional care documentation assistant..." — AI instantly adjusts its tone, depth, and knowledge based on the role you assign.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background:#1A6B6B">2</div>
+      <div class="step-content">
+        <div class="step-title">The CONTEXT — everything AI needs to know</div>
+        <div class="step-desc">"I am a support worker. Here is Alex's profile. Here is what happened during my shift..." — the more context you give, the better the output.</div>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num" style="background:#2A8A8A">3</div>
+      <div class="step-content">
+        <div class="step-title">The OUTPUT — exactly what you want produced</div>
+        <div class="step-desc">"Format with these sections: Overview, Activities, Mood, Concerns, Actions, Next shift..." — if you don't specify the format, AI will guess.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Persona creation -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🧑</span> Step 1 — Create Your Fictional Support Persona</div>
+    <div class="card-sub">Build this once. Save the conversation. Reuse every time you practise. Replace the values in [brackets] with your own fictional details.</div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">
+        PERSONA CREATION PROMPT — paste into claude.ai
+        <button class="copy-btn" onclick="copyPrompt(this,'p3')">Copy</button>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text" id="p3">I want to create a fictional support persona to help me practise writing care reports and understand how to support people like the individuals I work with.
+
+Please help me build a detailed fictional persona using the following characteristics. This is NOT a real person — it is a composite training character only.
+
+Name (fictional): [Choose a name]
+Age: [Approximate age group]
+Diagnosis/support needs: [General category e.g. autism, learning disability]
+Communication style: [How they communicate]
+Triggers: [What causes distress — general terms only]
+Positive strategies: [What helps them]
+Living situation: [Type of setting]
+My role: [Your job title and shift type]
+
+Please generate a full support profile I can use to practise writing shift notes, incident reports, and handover summaries. Confirm when the profile is ready.</div>
+      </div>
+    </div>
+
+    <div class="callout teal">
+      <span class="callout-icon">💡</span>
+      <div>Fill in your own fictional details below before you paste the prompt — this makes your persona more useful for practice</div>
+    </div>
+
+    <div class="field-row">
+      <div>
+        <label class="field-label">Fictional Name</label>
+        <input type="text" placeholder="e.g. Alex, Jordan, Sam...">
+      </div>
+      <div>
+        <label class="field-label">Age Group</label>
+        <input type="text" placeholder="e.g. mid-30s, early 50s...">
+      </div>
+    </div>
+    <div class="field-full">
+      <label class="field-label">Support Needs (general — no real details)</label>
+      <input type="text" placeholder="e.g. autism and anxiety, learning disability, dementia...">
+    </div>
+    <div class="field-full">
+      <label class="field-label">Communication Style</label>
+      <input type="text" placeholder="e.g. verbal but prefers written instructions, uses picture cards...">
+    </div>
+    <div class="field-full">
+      <label class="field-label">What Helps Them (positive strategies)</label>
+      <input type="text" placeholder="e.g. advance notice of changes, calm tone, routine...">
+    </div>
+    <div class="field-full">
+      <label class="field-label">How Claude Confirmed the Persona Was Ready (paste the first line of Claude's response):</label>
+      <textarea placeholder="Paste Claude's confirmation here..." style="min-height:60px"></textarea>
+    </div>
+  </div>
+
+  <!-- Master report prompt -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">📝</span> Step 2 — The Master Report Writing Prompt</div>
+    <div class="card-sub">Use this after your persona is confirmed. Type your rough shift description at the bottom where indicated.</div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">
+        MASTER REPORT PROMPT — use after persona is confirmed
+        <button class="copy-btn" onclick="copyPrompt(this,'p4')">Copy</button>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text" id="p4">You are my professional care documentation assistant. You help me write accurate, person-centred shift reports that meet CQC standards.
+
+I am going to describe what happened during my shift in informal, everyday language — as if I am telling a colleague. Your job is to:
+
+1. Convert my description into a structured, professional shift report
+2. Use person-centred language throughout (refer to the person by their name, not as 'the client' or 'the service user')
+3. Format the report with these sections:
+   - Date and shift time
+   - Overview of the shift
+   - Activities and engagement
+   - Mood and wellbeing observations
+   - Any concerns or incidents (if none, state 'No incidents to report')
+   - Actions taken and outcomes
+   - Recommendations for the next shift
+4. Flag any section where you need more information from me
+5. Keep language factual, professional, and non-judgemental
+
+Here is what happened during my shift with [YOUR PERSONA NAME] today:
+[TYPE YOUR ROUGH NOTES HERE — as informal as you like]</div>
+      </div>
+    </div>
+
+    <div class="field-full">
+      <label class="field-label">My rough shift notes (practise here — use your fictional persona):</label>
+      <textarea placeholder="Write your rough notes as if you're telling a colleague... e.g. 'Alex had a good morning, ate all his breakfast, did puzzles for an hour, got anxious at 2pm when the cleaner arrived unexpectedly...'" style="min-height:120px"></textarea>
+    </div>
+
+    <div class="field-full">
+      <label class="field-label">The section of Claude's report I found most useful or surprising:</label>
+      <textarea placeholder="Paste or summarise what stood out to you..." style="min-height:70px"></textarea>
+    </div>
+  </div>
+
+  <!-- 5-minute challenge -->
+  <div class="timer-wrap">
+    <div>
+      <div class="timer-label">5-Minute Live Challenge</div>
+      <div class="timer-name">Write a full report using Claude — go!</div>
+    </div>
+    <div class="timer-display" id="timer2-display">05:00</div>
+    <div class="timer-btns">
+      <button class="timer-btn start" onclick="startTimer('timer2',300)">▶ Start</button>
+      <button class="timer-btn reset" onclick="resetTimer('timer2',300)">↺ Reset</button>
+    </div>
+  </div>
+
+  <!-- Bonus prompts -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">⚡</span> Bonus Prompts — Try These If You Finish Early</div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">
+        INCIDENT REPORT PROMPT
+        <button class="copy-btn" onclick="copyPrompt(this,'p5')">Copy</button>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text" id="p5">Using [PERSONA NAME]'s profile, I need to write a formal incident report. Here is what happened:
+
+[TYPE ROUGH DESCRIPTION OF THE FICTIONAL INCIDENT]
+
+Please write this as a formal incident report including:
+- Date, time, and location
+- Description of the incident (factual and chronological)
+- The person's presentation before, during, and after
+- Actions I took and why
+- Who was notified and when
+- Follow-up actions required
+
+Make sure the language is factual, non-blaming, and meets the standard required for submission to a line manager.</div>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">
+        HANDOVER NOTE PROMPT
+        <button class="copy-btn" onclick="copyPrompt(this,'p6')">Copy</button>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text" id="p6">Based on my shift with [PERSONA NAME] today, please write a brief handover note for the incoming support worker.
+
+Key things that happened: [TYPE HERE]
+
+The handover should:
+- Be concise (under 200 words)
+- Highlight anything the next worker needs to know immediately
+- Note the person's current mood and any active concerns
+- Suggest one thing to try in the next shift based on today</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reflection -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">✏️</span> Module 2 Reflection</div>
+    <div class="field-full">
+      <label class="field-label">How long did it take you to produce a full report using Claude?</label>
+      <div class="choice-group inline">
+        <div class="choice-item"><input type="radio" name="speed" id="sp1"><label for="sp1"><span class="choice-dot"></span>Under 2 mins</label></div>
+        <div class="choice-item"><input type="radio" name="speed" id="sp2"><label for="sp2"><span class="choice-dot"></span>2–5 mins</label></div>
+        <div class="choice-item"><input type="radio" name="speed" id="sp3"><label for="sp3"><span class="choice-dot"></span>5–10 mins</label></div>
+        <div class="choice-item"><input type="radio" name="speed" id="sp4"><label for="sp4"><span class="choice-dot"></span>Still working on it</label></div>
+      </div>
+    </div>
+    <div class="field-full">
+      <label class="field-label">Compare this to how long a real report currently takes you. What is the time saving?</label>
+      <input type="text" placeholder="e.g. 'normally takes 40 mins, AI version took 4 mins — saving 36 minutes per shift'">
+    </div>
+    <div class="field-full">
+      <label class="field-label">What surprised you most about what Claude produced?</label>
+      <textarea placeholder="Write honestly — was it better or worse than you expected?"></textarea>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <button class="btn btn-back" onclick="showPage(2)">← Back</button>
+    <button class="btn btn-next" onclick="showPage(4)">Next: Prompt Library →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 4 — PROMPT LIBRARY
+═══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-4">
+  <div class="section-banner">
+    <div class="section-banner-eyebrow">Section 5</div>
+    <div class="section-banner-title">📋 Your <span>Full Prompt Library</span></div>
+    <div class="section-banner-sub">All 6 prompts from today's session — plus 3 bonus prompts to use immediately after this workshop. Copy any prompt with one tap.</div>
+  </div>
+
+  <!-- FAQ / Accordion -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">❓</span> How to Use This Library</div>
+    <div class="accordion" onclick="toggleAccordion(this)">
+      <div class="accordion-header">What is a prompt exactly? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">A prompt is the instruction you give to an AI tool. The better your instruction, the better the output. Think of it like briefing a very capable assistant — the more context and detail you give, the more useful their response will be.</div>
+    </div>
+    <div class="accordion" onclick="toggleAccordion(this)">
+      <div class="accordion-header">Do I need to use these prompts word-for-word? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">No — they are starting points. Over time you will adapt them to your own style and the specific people you support. The key parts to keep are the Role (who AI acts as) and the Output (what format you want). The context section is where you personalise.</div>
+    </div>
+    <div class="accordion" onclick="toggleAccordion(this)">
+      <div class="accordion-header">Can I save these prompts somewhere? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Yes — the easiest way is to create a note on your phone called "AI Prompts" and paste each one you use regularly. In Claude, you can also create a Project and pin your most-used prompts. Manuel will cover this in AI Leverager.</div>
+    </div>
+    <div class="accordion" onclick="toggleAccordion(this)">
+      <div class="accordion-header">What if the AI gives me a wrong or strange answer? <span class="accordion-arrow">▼</span></div>
+      <div class="accordion-body">Always review what AI produces before using it. AI can make mistakes — especially with specific policies or procedures it does not have in its context. For NotebookLM, check the citation. For Claude, edit the output to match the real situation before submitting any report.</div>
+    </div>
+  </div>
+
+  <!-- All 6 prompts -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">01</span> Policy Assistant</div>
+    <div class="badge teal" style="margin-bottom:12px">NotebookLM</div>
+    <div class="prompt-box">
+      <div class="prompt-label">Policy Overview Query <button class="copy-btn" onclick="copyPrompt(this,'lib1')">Copy</button></div>
+      <div class="prompt-body"><div class="prompt-text" id="lib1">You are my personal policy coach. I have uploaded my workplace policy document. Please explain to me in simple, clear language:
+
+1. What are my 3 most important responsibilities under this policy?
+2. What should I do immediately if I think a service user is at risk?
+3. What am I NOT allowed to do, even if asked?
+
+No jargon. Speak to me as if I am new to this role.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">02</span> Fictional Persona Builder</div>
+    <div class="badge teal" style="margin-bottom:12px">Claude AI</div>
+    <div class="prompt-box">
+      <div class="prompt-label">Build Your Practice Persona <button class="copy-btn" onclick="copyPrompt(this,'lib2')">Copy</button></div>
+      <div class="prompt-body"><div class="prompt-text" id="lib2">Help me build a fictional support persona for practice purposes only.
+
+Name: [Choose a fictional name]
+Age: [Approximate age group]
+Support needs: [General category]
+Communication style: [How they communicate]
+Key triggers: [What causes distress — general terms]
+Positive strategies: [What helps them]
+My role: [Your job title and shift type]
+
+Generate a full support profile I can use to practise writing shift notes and reports. Confirm when ready.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">03</span> Shift Report Writer</div>
+    <div class="badge teal" style="margin-bottom:12px">Claude AI</div>
+    <div class="prompt-box">
+      <div class="prompt-label">Master Report Writing Prompt <button class="copy-btn" onclick="copyPrompt(this,'lib3')">Copy</button></div>
+      <div class="prompt-body"><div class="prompt-text" id="lib3">You are my care documentation assistant. Convert my informal shift description into a professional, CQC-standard report.
+
+Format with these sections:
+- Date and shift time
+- Overview of the shift
+- Activities and engagement
+- Mood and wellbeing observations
+- Concerns or incidents (state 'None' if none)
+- Actions taken and outcomes
+- Recommendations for the next shift
+
+Use person-centred language. Flag if you need more information.
+
+Here is what happened during my shift with [NAME] today:
+[TYPE YOUR ROUGH NOTES HERE]</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">04</span> Incident Report Writer</div>
+    <div class="badge teal" style="margin-bottom:12px">Claude AI</div>
+    <div class="prompt-box">
+      <div class="prompt-label">Formal Incident Report <button class="copy-btn" onclick="copyPrompt(this,'lib4')">Copy</button></div>
+      <div class="prompt-body"><div class="prompt-text" id="lib4">Write a formal incident report based on this description:
+[TYPE WHAT HAPPENED — fictional only]
+
+Include: date/time/location, factual chronological description, the person's presentation before/during/after, actions taken, who was notified and when, follow-up required.
+
+Language must be factual, non-blaming, and suitable for submission to a line manager.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">05</span> Handover Note Generator</div>
+    <div class="badge teal" style="margin-bottom:12px">Claude AI</div>
+    <div class="prompt-box">
+      <div class="prompt-label">Quick Handover Note <button class="copy-btn" onclick="copyPrompt(this,'lib5')">Copy</button></div>
+      <div class="prompt-body"><div class="prompt-text" id="lib5">Write a brief handover note for the incoming support worker.
+
+Key things from my shift: [TYPE HERE]
+
+Requirements:
+- Under 200 words
+- Highlight anything the next worker needs to know immediately
+- Note current mood and any active concerns
+- Suggest one thing to try in the next shift based on today</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">06</span> Personal AI Assistant Setup</div>
+    <div class="badge teal" style="margin-bottom:12px">Claude AI</div>
+    <div class="prompt-box">
+      <div class="prompt-label">Set Up Claude as YOUR Assistant <button class="copy-btn" onclick="copyPrompt(this,'lib6')">Copy</button></div>
+      <div class="prompt-body"><div class="prompt-text" id="lib6">You are my personal AI assistant for my work as a [YOUR ROLE].
+
+My role: [Job title and setting]
+The people I support: [General description — no real names or data]
+My biggest challenge at work: [e.g. documentation, shift planning, policy queries]
+Tools I currently use: [e.g. paper notes, specific apps]
+
+From now on, help me work smarter. Keep your responses simple, practical, and specific to my role. Ask me questions if you need more information.</div></div>
+    </div>
+  </div>
+
+  <!-- BONUS prompts -->
+  <div class="card" style="border-color:var(--amber-border)">
+    <div class="card-title"><span class="emoji">🎁</span> Bonus Prompts — Take These Home</div>
+    <div class="card-sub">Three extra prompts not covered in the main session</div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">BONUS 1 — Email Drafter <button class="copy-btn" onclick="copyPrompt(this,'bon1')">Copy</button></div>
+      <div class="prompt-body"><div class="prompt-text" id="bon1">You are my professional email assistant. Help me write a clear, professional email.
+
+Purpose: [What is the email for?]
+Recipient: [Who am I writing to? e.g. my manager, a family member, HR]
+Key points I need to include: [List them informally]
+Tone needed: [e.g. formal, friendly, urgent, apologetic]
+
+Draft the email for me. Keep it concise and professional.</div></div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">BONUS 2 — CV and Application Improver <button class="copy-btn" onclick="copyPrompt(this,'bon2')">Copy</button></div>
+      <div class="prompt-body"><div class="prompt-text" id="bon2">You are an experienced HR professional who specialises in the health and social care sector.
+
+Here is my current CV / personal statement: [PASTE YOUR TEXT HERE]
+
+Here is the job I am applying for: [PASTE JOB DESCRIPTION]
+
+Please:
+1. Rewrite my CV/statement to better match this role
+2. Highlight any gaps I should address
+3. Give me 3 specific improvements I can make
+4. Score my application out of 10 and explain why</div></div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-label">BONUS 3 — Weekly Planner <button class="copy-btn" onclick="copyPrompt(this,'bon3')">Copy</button></div>
+      <div class="prompt-body"><div class="prompt-text" id="bon3">You are my personal productivity assistant. Help me plan my week.
+
+My role: [Job title]
+My working days and hours this week: [List them]
+Key tasks I need to complete: [List everything — work and personal]
+My biggest priority this week: [The most important thing]
+Things I tend to procrastinate on: [Be honest]
+
+Create a realistic weekly plan with time blocks, starting with my highest priority tasks. Flag anything that looks unrealistic given my hours.</div></div>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <button class="btn btn-back" onclick="showPage(3)">← Back</button>
+    <button class="btn btn-next" onclick="showPage(5)">Next: My Action Plan →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 5 — ACTION PLAN
+═══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-5">
+  <div class="section-banner">
+    <div class="section-banner-eyebrow">Section 6</div>
+    <div class="section-banner-title">🎯 My <span>Personal Action Plan</span></div>
+    <div class="section-banner-sub">The people who get real results from today are the ones who commit to specific actions. Not vague intentions — specific, timed actions.</div>
+  </div>
+
+  <!-- Key takeaways -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">💡</span> My 3 Biggest Takeaways From Today</div>
+    <div class="reflection-grid">
+      <div class="reflection-box">
+        <div class="reflection-num">01</div>
+        <div class="reflection-q">The most useful thing I learned today was:</div>
+        <textarea placeholder="Write it here..." style="min-height:80px;font-size:12.5px;border-color:var(--teal-border)"></textarea>
+      </div>
+      <div class="reflection-box">
+        <div class="reflection-num">02</div>
+        <div class="reflection-q">The thing that surprised me most was:</div>
+        <textarea placeholder="Write it here..." style="min-height:80px;font-size:12.5px;border-color:var(--teal-border)"></textarea>
+      </div>
+      <div class="reflection-box">
+        <div class="reflection-num">03</div>
+        <div class="reflection-q">The question I still have is:</div>
+        <textarea placeholder="Write it here..." style="min-height:80px;font-size:12.5px;border-color:var(--teal-border)"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Commitments -->
+  <div class="commit-card">
+    <div class="commit-card-title">⚡ My 72-Hour Commitments — Starting Tonight</div>
+    <div class="callout teal" style="margin-bottom:16px;background:rgba(78,205,196,.1);border-color:rgba(78,205,196,.3)">
+      <span class="callout-icon">⏰</span>
+      <div style="color:rgba(255,255,255,.8)">Research shows that if you do not act on new learning within 72 hours, you retain less than 10% of it. These commitments make today count.</div>
+    </div>
+    <div class="commit-item">
+      <input type="checkbox" class="commit-check" id="c1">
+      <div>
+        <div class="commit-label">I will open NotebookLM and upload ONE policy document from work</div>
+        <input class="commit-input" type="text" placeholder="Which document? By when? e.g. 'My safeguarding policy — tonight before bed'">
+      </div>
+    </div>
+    <div class="commit-item">
+      <input type="checkbox" class="commit-check" id="c2">
+      <div>
+        <div class="commit-label">I will create my fictional support persona in Claude</div>
+        <input class="commit-input" type="text" placeholder="My fictional persona name will be:">
+      </div>
+    </div>
+    <div class="commit-item">
+      <input type="checkbox" class="commit-check" id="c3">
+      <div>
+        <div class="commit-label">I will practise writing one shift report using the master prompt</div>
+        <input class="commit-input" type="text" placeholder="I will do this on: e.g. 'Wednesday evening after my shift'">
+      </div>
+    </div>
+    <div class="commit-item">
+      <input type="checkbox" class="commit-check" id="c4">
+      <div>
+        <div class="commit-label">I will share what I learned today with at least one colleague</div>
+        <input class="commit-input" type="text" placeholder="Who will I share this with?">
+      </div>
+    </div>
+    <div class="commit-item">
+      <input type="checkbox" class="commit-check" id="c5">
+      <div>
+        <div class="commit-label" style="color:var(--amber)">I will join AI Leverager to keep going (£5/month founding rate — closes midnight)</div>
+        <input class="commit-input" type="text" placeholder="What is stopping me? Or: 'Yes — joining now'">
+      </div>
+    </div>
+  </div>
+
+  <!-- Before and after -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">📊</span> Before & After — Track Your Progress</div>
+    <div class="card-sub">Fill in the "Before" column now. Come back in 4 weeks and fill in the "After" column.</div>
+    <table style="width:100%;border-collapse:collapse;font-size:12.5px">
+      <thead>
+        <tr>
+          <th style="background:var(--teal-dark);color:#A3E4D7;padding:10px 12px;text-align:left;font-size:10px;font-family:'Montserrat',sans-serif;letter-spacing:1px">METRIC</th>
+          <th style="background:var(--teal-dark);color:#A3E4D7;padding:10px 12px;text-align:left;font-size:10px;font-family:'Montserrat',sans-serif;letter-spacing:1px">TODAY (BEFORE)</th>
+          <th style="background:var(--teal-dark);color:#A3E4D7;padding:10px 12px;text-align:left;font-size:10px;font-family:'Montserrat',sans-serif;letter-spacing:1px">4 WEEKS (AFTER)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:10px 12px;color:var(--grey);font-size:12px">Avg. time to write a shift report</td>
+          <td style="padding:10px 12px"><input type="text" placeholder="e.g. 45 mins" style="border:none;outline:none;font-size:12.5px;width:100%;background:transparent;color:var(--slate)"></td>
+          <td style="padding:10px 12px;background:var(--teal-bg)"><input type="text" placeholder="Fill in 4 weeks" style="border:none;outline:none;font-size:12.5px;width:100%;background:transparent;color:var(--teal-dark)"></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:10px 12px;color:var(--grey);font-size:12px">Confidence with AI tools (1–10)</td>
+          <td style="padding:10px 12px"><input type="text" placeholder="e.g. 3/10" style="border:none;outline:none;font-size:12.5px;width:100%;background:transparent;color:var(--slate)"></td>
+          <td style="padding:10px 12px;background:var(--teal-bg)"><input type="text" placeholder="Fill in 4 weeks" style="border:none;outline:none;font-size:12.5px;width:100%;background:transparent;color:var(--teal-dark)"></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:10px 12px;color:var(--grey);font-size:12px">Confidence with workplace policies (1–10)</td>
+          <td style="padding:10px 12px"><input type="text" placeholder="e.g. 5/10" style="border:none;outline:none;font-size:12.5px;width:100%;background:transparent;color:var(--slate)"></td>
+          <td style="padding:10px 12px;background:var(--teal-bg)"><input type="text" placeholder="Fill in 4 weeks" style="border:none;outline:none;font-size:12.5px;width:100%;background:transparent;color:var(--teal-dark)"></td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;color:var(--grey);font-size:12px">Hours saved per week on admin</td>
+          <td style="padding:10px 12px"><input type="text" placeholder="e.g. 0 hrs saved" style="border:none;outline:none;font-size:12.5px;width:100%;background:transparent;color:var(--slate)"></td>
+          <td style="padding:10px 12px;background:var(--teal-bg)"><input type="text" placeholder="Fill in 4 weeks" style="border:none;outline:none;font-size:12.5px;width:100%;background:transparent;color:var(--teal-dark)"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AI Leverager -->
+  <div class="card" style="border-color:var(--amber-border);background:linear-gradient(135deg,#0B3D3D,#1A6B6B)">
+    <div class="card-title" style="color:var(--teal-light)"><span class="emoji">⚡</span> Keep Going — AI Leverager</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:16px">Everything you learned today is the beginning. AI Leverager is where we go deeper — every month, a new live session, new prompt packs, and a community that understands your world.</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 14px;flex:1;min-width:140px">
+        <div style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;color:#A3E4D7;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Monthly</div>
+        <div style="font-size:12.5px;color:#fff">Live AI training for care workers</div>
+      </div>
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 14px;flex:1;min-width:140px">
+        <div style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;color:#A3E4D7;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Ongoing</div>
+        <div style="font-size:12.5px;color:#fff">New prompt packs every month</div>
+      </div>
+      <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 14px;flex:1;min-width:140px">
+        <div style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:800;color:#A3E4D7;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Always</div>
+        <div style="font-size:12.5px;color:#fff">Community support between sessions</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <div style="font-size:24px;font-weight:900;color:var(--amber);font-family:'Montserrat',sans-serif">£5<span style="font-size:13px;font-weight:600;color:rgba(255,255,255,.5)">/month today only</span></div>
+        <div style="font-size:11px;color:rgba(255,255,255,.4)">Normal price £10/month &nbsp;·&nbsp; Locked in for life &nbsp;·&nbsp; Closes midnight tonight</div>
+      </div>
+      <div style="background:var(--amber);border-radius:10px;padding:12px 22px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;color:#3D1F00;cursor:pointer">Join AI Leverager →</div>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <button class="btn btn-back" onclick="showPage(4)">← Back</button>
+    <button class="btn btn-next" onclick="showPage(6)">Next: Certificate →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 6 — CERTIFICATE
+═══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-6">
+  <div class="section-banner">
+    <div class="section-banner-eyebrow">Section 7</div>
+    <div class="section-banner-title">🏅 Your <span>Certificate of Completion</span></div>
+    <div class="section-banner-sub">You showed up. You participated. You now have tools most care workers don't even know exist yet. That matters.</div>
+  </div>
+
+  <!-- Certificate -->
+  <div class="certificate">
+    <div class="cert-org">North Wales Africa Society &nbsp;·&nbsp; AI Leverager</div>
+    <div style="font-size:32px;margin-bottom:8px">🏅</div>
+    <div class="cert-title">Certificate of Completion</div>
+    <div class="cert-sub">AI Mastery for Care Workers Workshop &nbsp;·&nbsp; 27 June 2026</div>
+    <div class="cert-name-wrap">
+      <div class="cert-name-label">This certifies that</div>
+      <input class="cert-name-input" type="text" placeholder="Type your name here" id="cert-name">
+    </div>
+    <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:16px">has successfully completed a 2.5-hour hands-on workshop covering</div>
+    <div class="cert-badges">
+      <span class="badge teal">🔒 GDPR-Safe AI</span>
+      <span class="badge teal">📚 Google NotebookLM</span>
+      <span class="badge teal">🤖 Claude AI</span>
+      <span class="badge teal">📝 Report Writing</span>
+      <span class="badge teal">📋 6-Prompt Library</span>
+    </div>
+    <div class="cert-footer">
+      Facilitated by Manuel Chinyereuba &nbsp;·&nbsp; AI Leverager<br>
+      Organised by North Wales Africa Society (NWAS) &nbsp;·&nbsp; Hybrid Event
+    </div>
+  </div>
+
+  <div class="callout teal">
+    <span class="callout-icon">💡</span>
+    <div>Type your name into the certificate above, then take a screenshot to save it. Share it on LinkedIn to show your commitment to professional development.</div>
+  </div>
+
+  <!-- Final reflection -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">🌟</span> Final Reflection — In Your Own Words</div>
+    <div class="field-full">
+      <label class="field-label">Complete this sentence: "After today, I feel..."</label>
+      <textarea placeholder="Write whatever comes to mind — even if it is still feeling uncertain, write that. Honesty helps." style="min-height:80px"></textarea>
+    </div>
+    <div class="field-full">
+      <label class="field-label">The one person I will tell about today's workshop is:</label>
+      <input type="text" placeholder="Name a specific person — not 'someone'">
+    </div>
+    <div class="field-full">
+      <label class="field-label">What I will tell them:</label>
+      <textarea placeholder="Write the one thing you would say to convince them to attend the next one..." style="min-height:80px"></textarea>
+    </div>
+    <div class="field-full">
+      <label class="field-label">My overall rating of today's workshop:</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div class="choice-item" style="display:inline-flex"><input type="radio" name="rating" id="r1"><label for="r1"><span class="choice-dot"></span>⭐ 1/5</label></div>
+        <div class="choice-item" style="display:inline-flex"><input type="radio" name="rating" id="r2"><label for="r2"><span class="choice-dot"></span>⭐⭐ 2/5</label></div>
+        <div class="choice-item" style="display:inline-flex"><input type="radio" name="rating" id="r3"><label for="r3"><span class="choice-dot"></span>⭐⭐⭐ 3/5</label></div>
+        <div class="choice-item" style="display:inline-flex"><input type="radio" name="rating" id="r4"><label for="r4"><span class="choice-dot"></span>⭐⭐⭐⭐ 4/5</label></div>
+        <div class="choice-item" style="display:inline-flex"><input type="radio" name="rating" id="r5"><label for="r5"><span class="choice-dot"></span>⭐⭐⭐⭐⭐ 5/5</label></div>
+      </div>
+    </div>
+    <div class="field-full">
+      <label class="field-label">One thing Manuel could do to make the next workshop even better:</label>
+      <textarea placeholder="Your honest feedback helps improve every future session..." style="min-height:70px"></textarea>
+    </div>
+  </div>
+
+  <!-- Closing quote -->
+  <div style="background:var(--teal-dark);border-radius:14px;padding:28px;text-align:center;margin-bottom:20px">
+    <div style="font-size:clamp(15px,3vw,19px);font-style:italic;color:#fff;line-height:1.6;margin-bottom:12px">"AI isn't here to replace your value — it's here to reveal it. Use it to remove the noise, lighten the load, and reclaim the time you need to focus on what truly matters."</div>
+    <div style="font-size:12px;color:var(--teal-light);font-weight:600">— Manuel Chinyereuba &nbsp;·&nbsp; AI Leverager</div>
+  </div>
+
+  <div class="page-nav">
+    <button class="btn btn-back" onclick="showPage(5)">← Back</button>
+    <button class="btn btn-save" onclick="printWorkbook()">🖨️ Save / Print Workbook</button>
+  </div>
+</div>
+
+<!-- SAVE BAR -->
+<div class="save-bar">
+  <span class="save-bar-text">NWAS AI Workshop Workbook &nbsp;·&nbsp; Your answers are saved in this browser session</span>
+  <div class="save-bar-right">
+    <span id="completion-pct" style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:var(--teal-light)">0% complete</span>
+    <button class="btn btn-save" style="padding:8px 16px;font-size:11px" onclick="printWorkbook()">🖨️ Print</button>
+  </div>
+</div>
+
+<script>
+// ── State ─────────────────────────────────────────────────────────────────────
+var currentPage = 0;
+var timers = {};
+var pageLabels = [
+  "Section 1 of 7 — Welcome",
+  "Section 2 of 7 — GDPR Rules",
+  "Section 3 of 7 — NotebookLM",
+  "Section 4 of 7 — Claude AI",
+  "Section 5 of 7 — Prompt Library",
+  "Section 6 of 7 — Action Plan",
+  "Section 7 of 7 — Certificate"
+];
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+function showPage(n) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b,i){ b.classList.toggle('active', i === n); });
+  document.getElementById('page-' + n).classList.add('active');
+  currentPage = n;
+  updateProgress(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateCompletion();
+}
+
+function updateProgress(n) {
+  var pct = Math.round(((n + 1) / 7) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-label').textContent = pageLabels[n];
+}
+
+// ── Check items ───────────────────────────────────────────────────────────────
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  updateCompletion();
+}
+
+// ── Accordion ─────────────────────────────────────────────────────────────────
+function toggleAccordion(el) {
+  el.classList.toggle('open');
+}
+
+// ── Copy prompts ──────────────────────────────────────────────────────────────
+function copyPrompt(btn, id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent.trim()).then(function() {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    showToast('✓ Prompt copied to clipboard!');
+    setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+  }).catch(function() {
+    // Fallback
+    var ta = document.createElement('textarea');
+    ta.value = el.textContent.trim();
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    showToast('✓ Prompt copied!');
+    setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+
+// ── Timers ────────────────────────────────────────────────────────────────────
+function startTimer(id, seconds) {
+  if (timers[id]) clearInterval(timers[id]);
+  var remaining = seconds;
+  var display = document.getElementById(id + '-display');
+  if (!display) return;
+
+  timers[id] = setInterval(function() {
+    remaining--;
+    var m = Math.floor(remaining / 60);
+    var s = remaining % 60;
+    display.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    if (remaining <= 0) {
+      clearInterval(timers[id]);
+      display.textContent = '00:00';
+      display.style.color = '#E8A020';
+      showToast("⏰ Time's up!");
+    } else if (remaining <= 30) {
+      display.style.color = '#E8A020';
+    }
+  }, 1000);
+}
+
+function resetTimer(id, seconds) {
+  if (timers[id]) clearInterval(timers[id]);
+  var display = document.getElementById(id + '-display');
+  if (!display) return;
+  var m = Math.floor(seconds / 60);
+  var s = seconds % 60;
+  display.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  display.style.color = '#4ECDC4';
+}
+
+// ── Completion tracking ───────────────────────────────────────────────────────
+function updateCompletion() {
+  var allFields = document.querySelectorAll('textarea, input[type="text"]');
+  var filled = 0;
+  allFields.forEach(function(f){ if (f.value.trim().length > 2) filled++; });
+  var checks = document.querySelectorAll('.check-item.checked').length;
+  var radios = document.querySelectorAll('input[type="radio"]:checked').length;
+  var total = allFields.length + document.querySelectorAll('.check-item').length + document.querySelectorAll('input[type="radio"]').length / 5;
+  var done = filled + checks + radios;
+  var pct = Math.min(100, Math.round((done / Math.max(total, 1)) * 100));
+  var el = document.getElementById('completion-pct');
+  if (el) el.textContent = pct + '% complete';
+}
+
+// ── Print ─────────────────────────────────────────────────────────────────────
+function printWorkbook() {
+  window.print();
+}
+
+// ── Cert name sync ────────────────────────────────────────────────────────────
+var pn = document.getElementById('participant-name');
+var cn = document.getElementById('cert-name');
+if (pn && cn) {
+  pn.addEventListener('input', function(){ cn.value = pn.value; });
+  cn.addEventListener('input', function(){ pn.value = cn.value; });
+}
+
+// ── Attach input listeners ────────────────────────────────────────────────────
+document.querySelectorAll('textarea, input[type="text"]').forEach(function(el){
+  el.addEventListener('input', updateCompletion);
+});
+document.querySelectorAll('input[type="radio"]').forEach(function(el){
+  el.addEventListener('change', updateCompletion);
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+showPage(0);
+</script>
+
+</div>
+<!-- end #workbookContent -->
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+// ACCESS GATE LOGIC
+//
+// 1. On page load, inject the systeme.io lead-capture form into the gate screen
+// 2. Listen for the systeme.io "form submitted" message via postMessage
+// 3. Once submitted, hide the gate and reveal the workbook content
+//
+// Note: this is a CLIENT-SIDE gate. It controls what the visitor SEES on
+// this page, but does not itself prevent someone from viewing the page's
+// source code. For a workshop workbook this is the right level of friction —
+// it captures the lead while keeping things simple and fast to set up.
+// ═══════════════════════════════════════════════════════════════════════════
+(function() {
+  var formWrap = document.getElementById('gateFormWrap');
+  var loadingMsg = document.getElementById('gateLoadingMsg');
+  var gateScreen = document.getElementById('gateScreen');
+  var workbookContent = document.getElementById('workbookContent');
+
+  function unlockWorkbook() {
+    gateScreen.style.display = 'none';
+    workbookContent.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  // Inject the systeme.io form script into the gate
+  var script = document.createElement('script');
+  script.id = 'form-script-tag-24540469';
+  script.src = 'https://www.preneurdemy.com/public/remote/page/420883829442ac7835cc15ecf3e0af32a63b918d.js';
+  formWrap.appendChild(script);
+
+  // Watch for the iframe to become visible (form has loaded), hide our spinner
+  var attempts = 0;
+  var maxAttempts = 60; // ~15 seconds
+  function checkIframeVisible() {
+    attempts++;
+    var iframe = document.querySelector('iframe[id^="systemeio-iframe-"]');
+    if (iframe && iframe.style.visibility === 'visible') {
+      if (loadingMsg) loadingMsg.style.display = 'none';
+      return;
+    }
+    if (attempts < maxAttempts) {
+      setTimeout(checkIframeVisible, 250);
+    } else if (loadingMsg) {
+      loadingMsg.innerHTML = '<span>The form is taking a moment to load. Please refresh this page if it doesn\'t appear shortly.</span>';
+    }
+  }
+  checkIframeVisible();
+
+  // Listen for systeme.io's postMessage events. Systeme.io forms typically
+  // fire a message when a submission completes. We listen broadly and check
+  // for common patterns, since the exact event shape can vary by form type.
+  window.addEventListener('message', function(event) {
+    if (!event.data) return;
+
+    var data = event.data;
+    var raw = JSON.stringify(data).toLowerCase();
+
+    // Common systeme.io submission signal patterns
+    var looksLikeSubmission =
+      raw.indexOf('"type":"submit"') > -1 ||
+      raw.indexOf('"type":"form_submitted"') > -1 ||
+      raw.indexOf('"event":"submit"') > -1 ||
+      raw.indexOf('thankyou') > -1 ||
+      raw.indexOf('thank-you') > -1 ||
+      raw.indexOf('success') > -1;
+
+    if (looksLikeSubmission) {
+      unlockWorkbook();
+    }
+  });
+
+  // ── FALLBACK: manual unlock link ──────────────────────────────────────────
+  // Since systeme.io's postMessage event names aren't publicly documented and
+  // can vary, we also show a manual "I've submitted the form" link after a
+  // short delay, so nobody gets stuck if the automatic detection above
+  // doesn't fire for their specific form configuration.
+  setTimeout(function() {
+    if (gateScreen.style.display !== 'none') {
+      var fallback = document.createElement('div');
+      fallback.style.textAlign = 'center';
+      fallback.style.padding = '0 28px 24px';
+      fallback.innerHTML =
+        '<a href="#" id="manualUnlockLink" style="font-size:12px;color:#1A6B6B;font-weight:600;text-decoration:underline;">' +
+        'Already submitted the form? Click here to continue →</a>';
+      gateScreen.querySelector('.gate-card').appendChild(fallback);
+      document.getElementById('manualUnlockLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        unlockWorkbook();
+      });
+    }
+  }, 8000);
+})();
+</script>
+
+</body>
+</html>
