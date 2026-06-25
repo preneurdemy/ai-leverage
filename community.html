@@ -476,7 +476,7 @@ img{max-width:100%;display:block}
 <nav class="nav">
   <div class="nav-inner">
     <div class="nav-brand"><span class="dot"></span> AI Leverager</div>
-    <a class="nav-cta" href="https://www.preneurdemy.com/ai-leverage-checkout">Join the founding circle</a>
+    <a class="nav-cta" href="https://paystack.shop/pay/ai-leverage">Join the founding circle</a>
   </div>
 </nav>
 
@@ -490,7 +490,7 @@ img{max-width:100%;display:block}
       <p class="hero-sub">AI Leverager isn't a course you finish. It's a circle of people — care workers, parents, builders — who show up every month to get sharper with AI together. <strong>What you put in keeps the room running for the next person.</strong></p>
 
       <div class="hero-ctas">
-        <a class="btn-primary" href="https://www.preneurdemy.com/ai-leverage-checkout">
+        <a class="btn-primary" href="https://paystack.shop/pay/ai-leverage">
           Join as a founding member
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
@@ -679,7 +679,7 @@ img{max-width:100%;display:block}
       </div>
 
       <div class="join-cta-wrap">
-        <a class="btn-join" href="https://www.preneurdemy.com/ai-leverage-checkout">
+        <a class="btn-join" href="https://paystack.shop/pay/ai-leverage">
           Take your founding seat
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
@@ -720,7 +720,6 @@ img{max-width:100%;display:block}
         <div class="faq-q"><span>What happens if I can't make a live session?</span><div class="faq-plus"></div></div>
         <div class="faq-a"><div class="faq-a-inner">Every session is recorded and added to the resource library, so you never lose access to what was covered. The community conversation also keeps going outside of live sessions.</div></div>
       </div>
-      <div class="faq-q-spacer"></div>
       <div class="faq-item">
         <div class="faq-q"><span>Will the price go up later?</span><div class="faq-plus"></div></div>
         <div class="faq-a"><div class="faq-a-inner">For new members, yes — the founding rate is intentionally limited. But once you join at £5/month, that rate is locked in for as long as you remain a member, even if new members later join at a higher rate.</div></div>
@@ -757,10 +756,9 @@ img{max-width:100%;display:block}
 (function(){
   var grid = document.getElementById('seatGrid');
   var total = 32;
-  var filledCount = 23; // gives a "filling up" feeling without claiming false scarcity numbers
+  var filledCount = 23;
   var pattern = [];
   for (var i = 0; i < total; i++) pattern.push(i < filledCount);
-  // shuffle deterministically-ish for visual texture but keep mostly filled
   for (var i = pattern.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var t = pattern[i]; pattern[i] = pattern[j]; pattern[j] = t;
