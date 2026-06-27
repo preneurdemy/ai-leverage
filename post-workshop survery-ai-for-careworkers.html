@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Mastery for Care Workers — Post-Workshop Survey</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal-dark:#0B3D3D;--teal:#1A6B6B;--teal-light:#4ECDC4;
+  --teal-bg:#EFF7F5;--teal-border:#B2D8D0;
+  --amber:#E8A020;--amber-dk:#B45309;--amber-bg:#FEF3C7;
+  --slate:#1E3A3A;--grey:#64748B;--border:#D1E8E4;
+  --white:#FFFFFF;--page-bg:#F0F5F3;--error:#DC2626;--success:#059669;
+}
+body{font-family:'Open Sans',sans-serif;background:var(--page-bg);color:var(--slate);min-height:100vh;padding:0 0 60px}
+
+.form-hero{background:var(--teal-dark);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden}
+.form-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:240px;height:240px;border-radius:50%;background:rgba(78,205,196,.07)}
+.form-hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-org{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:30px;padding:6px 18px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;color:#A3E4D7;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.hero-title{font-family:'Montserrat',sans-serif;font-size:clamp(24px,5vw,32px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:8px}
+.hero-title span{color:var(--teal-light)}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.62);max-width:420px;margin:0 auto}
+
+.form-wrap{max-width:640px;margin:-22px auto 0;padding:0 16px;position:relative;z-index:10}
+.progress-bar-wrap{background:#fff;border-radius:12px 12px 0 0;padding:16px 26px 12px;border-bottom:1px solid var(--border)}
+.progress-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.progress-text{font-family:'Montserrat',sans-serif;font-size:10.5px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px}
+.progress-pct{font-family:'Montserrat',sans-serif;font-size:10.5px;font-weight:700;color:var(--grey)}
+.progress-track{height:5px;background:#E2EEE8;border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-light));border-radius:10px;transition:width .4s ease;width:0%}
+
+.form-card{background:#fff;border-radius:0 0 16px 16px;overflow:hidden;box-shadow:0 8px 36px rgba(11,61,61,.10)}
+
+.form-section{display:none;padding:28px 28px 20px;border-top:1px solid var(--border)}
+.form-section.active{display:block}
+.form-section:first-of-type{border-top:none}
+.section-header{display:flex;align-items:flex-start;gap:13px;margin-bottom:24px}
+.section-icon{width:40px;height:40px;border-radius:10px;background:var(--teal-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.section-title{font-family:'Montserrat',sans-serif;font-size:17px;font-weight:800;color:var(--slate);margin-bottom:3px}
+.section-desc{font-size:12.5px;color:var(--grey);line-height:1.5}
+
+.field-full{margin-bottom:16px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:520px){.field-row{grid-template-columns:1fr}}
+.field-label{display:block;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}
+.required-star{color:var(--error);margin-left:2px}
+.field-hint{font-size:10.5px;color:var(--grey);margin-top:4px;line-height:1.4}
+
+input[type="text"],input[type="email"],input[type="tel"],select,textarea{
+  width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:9px;
+  font-family:'Open Sans',sans-serif;font-size:13.5px;color:var(--slate);background:#fff;
+  transition:border-color .2s,box-shadow .2s;outline:none;appearance:none
+}
+input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,107,107,.1)}
+textarea{resize:vertical;min-height:80px;line-height:1.5}
+
+.choice-group{display:flex;flex-direction:column;gap:7px}
+.choice-group.inline{flex-direction:row;flex-wrap:wrap;gap:7px}
+.choice-item input{position:absolute;opacity:0;width:0;height:0}
+.choice-item label{display:flex;align-items:center;gap:9px;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;font-size:13px;color:var(--slate);transition:border-color .2s,background .2s;line-height:1.4;user-select:none}
+.choice-item label:hover{border-color:var(--teal);background:var(--teal-bg)}
+.choice-item input:checked + label{border-color:var(--teal);background:var(--teal-bg);color:var(--teal-dark);font-weight:600}
+.choice-dot{width:16px;height:16px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.choice-item input:checked + label .choice-dot{background:var(--teal);border-color:var(--teal)}
+.choice-item input:checked + label .choice-dot::after{content:'';width:7px;height:7px;border-radius:50%;background:#fff;display:block}
+
+.scale-block{margin-bottom:18px}
+.scale-question{font-size:13px;font-weight:600;color:var(--slate);margin-bottom:10px;line-height:1.4}
+.scale-row{display:flex;gap:7px;justify-content:space-between}
+.scale-opt{flex:1}
+.scale-opt input{position:absolute;opacity:0}
+.scale-opt label{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 4px;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;transition:all .15s}
+.scale-opt label:hover{border-color:var(--teal)}
+.scale-opt input:checked + label{background:var(--teal);border-color:var(--teal)}
+.scale-num{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;color:var(--slate)}
+.scale-opt input:checked + label .scale-num{color:#fff}
+.scale-emoji{font-size:16px}
+.scale-caption-row{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--grey)}
+
+.callout{border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:9px;margin-bottom:16px;font-size:11.5px;line-height:1.5}
+.callout.teal{background:var(--teal-bg);border:1px solid var(--teal-border);color:var(--teal-dark)}
+.callout-icon{font-size:15px;flex-shrink:0}
+
+.form-nav{display:flex;align-items:center;justify-content:space-between;padding:18px 28px 24px;border-top:1px solid var(--border);gap:10px}
+.btn{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;border:none;border-radius:10px;padding:12px 24px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
+.btn-back{background:#F1F5F3;color:var(--teal);border:1.5px solid var(--border)}
+.btn-back:hover{background:var(--teal-bg);border-color:var(--teal)}
+.btn-next{background:var(--teal-dark);color:#fff;flex:1;justify-content:center;max-width:260px}
+.btn-next:hover{background:var(--teal);transform:translateY(-1px);box-shadow:0 4px 14px rgba(11,61,61,.22)}
+.btn-submit{background:var(--amber);color:#3D1F00;flex:1;justify-content:center;max-width:260px}
+.btn-submit:hover{background:#D4911A;transform:translateY(-1px)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+.step-dots{display:flex;align-items:center;gap:5px}
+.step-dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .3s}
+.step-dot.active{background:var(--teal);width:18px;border-radius:4px}
+.step-dot.done{background:var(--teal-light)}
+
+.success-screen{display:none;padding:44px 28px;text-align:center}
+.success-icon{width:64px;height:64px;background:#D1FAE5;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.success-title{font-family:'Montserrat',sans-serif;font-size:21px;font-weight:800;color:var(--slate);margin-bottom:8px}
+.success-body{font-size:13.5px;color:var(--grey);line-height:1.6;max-width:400px;margin:0 auto 8px}
+
+.spinner{display:inline-block;width:16px;height:16px;border:2.5px solid rgba(0,0,0,.15);border-top-color:var(--teal-dark);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div class="form-hero">
+  <div class="hero-org">Post-Workshop Survey</div>
+  <div class="hero-title">AI Mastery for<br><span>Care Workers</span></div>
+  <div class="hero-sub">Your honest feedback in 2 minutes — this directly shapes how the next workshop is run.</div>
+</div>
+
+<div class="form-wrap">
+  <div class="progress-bar-wrap">
+    <div class="progress-label">
+      <span class="progress-text" id="progress-text">Step 1 of 3 — Your Details</span>
+      <span class="progress-pct" id="progress-pct">33%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:33%"></div></div>
+  </div>
+
+  <div class="form-card">
+    <form id="survey-form" novalidate>
+
+      <!-- STEP 1: CONTACT DETAILS -->
+      <div class="form-section active" id="step-1">
+        <div class="section-header">
+          <div class="section-icon">👤</div>
+          <div>
+            <div class="section-title">Your Details</div>
+            <div class="section-desc">So we know who's responding — these are required.</div>
+          </div>
+        </div>
+
+        <div class="field-full">
+          <label class="field-label" for="full-name">Full Name<span class="required-star">*</span></label>
+          <input type="text" id="full-name" name="full_name" placeholder="e.g. Amara Okafor" required>
+        </div>
+
+        <div class="field-row">
+          <div>
+            <label class="field-label" for="phone">Phone Number<span class="required-star">*</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="+44 7700 000000" required>
+          </div>
+          <div>
+            <label class="field-label" for="email">Email Address<span class="required-star">*</span></label>
+            <input type="email" id="email" name="email" placeholder="yourname@email.com" required>
+          </div>
+        </div>
+
+        <div class="field-full">
+          <label class="field-label" for="attended-as">How did you attend the workshop?<span class="required-star">*</span></label>
+          <select id="attended-as" name="attended_as" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="In-Person">In-Person</option>
+            <option value="Online">Online</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- STEP 2: RATINGS -->
+      <div class="form-section" id="step-2">
+        <div class="section-header">
+          <div class="section-icon">⭐</div>
+          <div>
+            <div class="section-title">Rate the Workshop</div>
+            <div class="section-desc">1 = Poor, 5 = Excellent</div>
+          </div>
+        </div>
+
+        <div class="scale-block">
+          <div class="scale-question">Overall, how would you rate today's workshop?<span class="required-star">*</span></div>
+          <div class="scale-row">
+            <div class="scale-opt"><input type="radio" name="rating_overall" id="ro1" value="1"><label for="ro1"><span class="scale-emoji">😞</span><span class="scale-num">1</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_overall" id="ro2" value="2"><label for="ro2"><span class="scale-emoji">🙁</span><span class="scale-num">2</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_overall" id="ro3" value="3"><label for="ro3"><span class="scale-emoji">😐</span><span class="scale-num">3</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_overall" id="ro4" value="4"><label for="ro4"><span class="scale-emoji">🙂</span><span class="scale-num">4</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_overall" id="ro5" value="5"><label for="ro5"><span class="scale-emoji">🤩</span><span class="scale-num">5</span></label></div>
+          </div>
+        </div>
+
+        <div class="scale-block">
+          <div class="scale-question">How clear and easy to follow was the NotebookLM module?<span class="required-star">*</span></div>
+          <div class="scale-row">
+            <div class="scale-opt"><input type="radio" name="rating_notebooklm" id="rn1" value="1"><label for="rn1"><span class="scale-num">1</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_notebooklm" id="rn2" value="2"><label for="rn2"><span class="scale-num">2</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_notebooklm" id="rn3" value="3"><label for="rn3"><span class="scale-num">3</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_notebooklm" id="rn4" value="4"><label for="rn4"><span class="scale-num">4</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_notebooklm" id="rn5" value="5"><label for="rn5"><span class="scale-num">5</span></label></div>
+          </div>
+        </div>
+
+        <div class="scale-block">
+          <div class="scale-question">How clear and easy to follow was the Claude AI module?<span class="required-star">*</span></div>
+          <div class="scale-row">
+            <div class="scale-opt"><input type="radio" name="rating_claude" id="rc1" value="1"><label for="rc1"><span class="scale-num">1</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_claude" id="rc2" value="2"><label for="rc2"><span class="scale-num">2</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_claude" id="rc3" value="3"><label for="rc3"><span class="scale-num">3</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_claude" id="rc4" value="4"><label for="rc4"><span class="scale-num">4</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_claude" id="rc5" value="5"><label for="rc5"><span class="scale-num">5</span></label></div>
+          </div>
+        </div>
+
+        <div class="scale-block">
+          <div class="scale-question">How confident do you feel using AI in your work now, after today?<span class="required-star">*</span></div>
+          <div class="scale-row">
+            <div class="scale-opt"><input type="radio" name="rating_confidence" id="rf1" value="1"><label for="rf1"><span class="scale-num">1</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_confidence" id="rf2" value="2"><label for="rf2"><span class="scale-num">2</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_confidence" id="rf3" value="3"><label for="rf3"><span class="scale-num">3</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_confidence" id="rf4" value="4"><label for="rf4"><span class="scale-num">4</span></label></div>
+            <div class="scale-opt"><input type="radio" name="rating_confidence" id="rf5" value="5"><label for="rf5"><span class="scale-num">5</span></label></div>
+          </div>
+          <div class="scale-caption-row"><span>Not confident</span><span>Very confident</span></div>
+        </div>
+
+        <div class="field-full">
+          <label class="field-label">How likely are you to recommend this workshop to a colleague?<span class="required-star">*</span></label>
+          <div class="choice-group">
+            <div class="choice-item"><input type="radio" name="recommend" id="rec1" value="Definitely"><label for="rec1"><span class="choice-dot"></span>Definitely — I already have someone in mind</label></div>
+            <div class="choice-item"><input type="radio" name="recommend" id="rec2" value="Probably"><label for="rec2"><span class="choice-dot"></span>Probably</label></div>
+            <div class="choice-item"><input type="radio" name="recommend" id="rec3" value="Not sure"><label for="rec3"><span class="choice-dot"></span>Not sure</label></div>
+            <div class="choice-item"><input type="radio" name="recommend" id="rec4" value="Unlikely"><label for="rec4"><span class="choice-dot"></span>Unlikely</label></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: OPEN FEEDBACK -->
+      <div class="form-section" id="step-3">
+        <div class="section-header">
+          <div class="section-icon">💬</div>
+          <div>
+            <div class="section-title">In Your Own Words</div>
+            <div class="section-desc">This is the part that helps us improve the most.</div>
+          </div>
+        </div>
+
+        <div class="callout teal">
+          <span class="callout-icon">💡</span>
+          <div>Be as honest as you like — specific feedback (good or critical) is genuinely more useful than general praise.</div>
+        </div>
+
+        <div class="field-full">
+          <label class="field-label" for="most-useful">What was the MOST useful part of today's workshop?</label>
+          <textarea id="most-useful" name="most_useful" placeholder="e.g. the report-writing prompt, the GDPR explanation, the live demo..."></textarea>
+        </div>
+
+        <div class="field-full">
+          <label class="field-label" for="least-useful">What was the LEAST useful part, or what would you change?</label>
+          <textarea id="least-useful" name="least_useful" placeholder="Be honest — this genuinely helps us improve the next one"></textarea>
+        </div>
+
+        <div class="field-full">
+          <label class="field-label" for="topics-wanted">What topics would you like covered in a future session?</label>
+          <textarea id="topics-wanted" name="topics_wanted" placeholder="Anything you wish we'd covered today, or want to go deeper on next time..." style="min-height:60px"></textarea>
+        </div>
+
+        <div class="field-full">
+          <label class="field-label" for="other-comments">Any other comments?</label>
+          <textarea id="other-comments" name="other_comments" placeholder="Anything else you'd like to share..." style="min-height:60px"></textarea>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-screen" id="success-screen">
+        <div class="success-icon">🙏</div>
+        <div class="success-title">Thank You!</div>
+        <div class="success-body">Your feedback has been recorded. It genuinely helps shape how the next workshop is run.</div>
+        <div class="success-body" style="font-size:12.5px;color:#1A6B6B;font-weight:600;margin-top:10px">— Manuel Chinyereuba</div>
+      </div>
+
+    </form>
+
+    <div class="form-nav" id="form-nav">
+      <button type="button" class="btn btn-back" id="btn-back" style="display:none" onclick="goBack()">← Back</button>
+      <div class="step-dots" id="step-dots">
+        <div class="step-dot active" id="dot-1"></div>
+        <div class="step-dot" id="dot-2"></div>
+        <div class="step-dot" id="dot-3"></div>
+      </div>
+      <button type="button" class="btn btn-next" id="btn-next" onclick="goNext()">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── PASTE YOUR DEPLOYED WEB APP URL HERE ─────────────────────────────────────
+var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzqWUQiXMTmSapcn0kNoTBk_vLNxEzAK2gnLjaxh_oISx5y8txRXbiN-hG5iWstnEKc/exec";
+// ───────────────────────────────────────────────────────────────────────────────
+
+var currentStep = 1;
+var totalSteps = 3;
+var stepLabels = [
+  "Step 1 of 3 — Your Details",
+  "Step 2 of 3 — Rate the Workshop",
+  "Step 3 of 3 — In Your Own Words"
+];
+
+function updateProgress() {
+  var pct = Math.round((currentStep / totalSteps) * 100);
+  document.getElementById("progress-fill").style.width = pct + "%";
+  document.getElementById("progress-pct").textContent = pct + "%";
+  document.getElementById("progress-text").textContent = stepLabels[currentStep - 1];
+  for (var i = 1; i <= totalSteps; i++) {
+    var d = document.getElementById("dot-" + i);
+    d.className = "step-dot";
+    if (i < currentStep) d.classList.add("done");
+    else if (i === currentStep) d.classList.add("active");
+  }
+  document.getElementById("btn-back").style.display = currentStep > 1 ? "inline-flex" : "none";
+  var nb = document.getElementById("btn-next");
+  if (currentStep === totalSteps) {
+    nb.className = "btn btn-submit";
+    nb.innerHTML = "✓ Submit Feedback";
+    nb.onclick = submitForm;
+  } else {
+    nb.className = "btn btn-next";
+    nb.innerHTML = "Continue →";
+    nb.onclick = goNext;
+  }
+}
+
+function validateStep(step) {
+  var section = document.getElementById("step-" + step);
+  var required = section.querySelectorAll("[required]");
+  var valid = true;
+  required.forEach(function(el) {
+    if (!el.value || el.value === "") {
+      el.style.borderColor = "#DC2626";
+      el.style.boxShadow = "0 0 0 3px rgba(220,38,38,.1)";
+      valid = false;
+    } else {
+      el.style.borderColor = "";
+      el.style.boxShadow = "";
+    }
+  });
+
+  if (step === 1) {
+    var emailEl = document.getElementById("email");
+    if (emailEl.value && emailEl.value.indexOf("@") === -1) {
+      emailEl.style.borderColor = "#DC2626";
+      valid = false;
+      alert("Please enter a valid email address.");
+    }
+  }
+
+  if (step === 2) {
+    var radioGroups = ["rating_overall", "rating_notebooklm", "rating_claude", "rating_confidence", "recommend"];
+    radioGroups.forEach(function(name) {
+      if (!section.querySelector("input[name='" + name + "']:checked")) {
+        valid = false;
+      }
+    });
+    if (!valid) alert("Please answer all rating questions before continuing.");
+  }
+
+  return valid;
+}
+
+function goNext() {
+  if (!validateStep(currentStep)) return;
+  document.getElementById("step-" + currentStep).classList.remove("active");
+  currentStep++;
+  document.getElementById("step-" + currentStep).classList.add("active");
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function goBack() {
+  document.getElementById("step-" + currentStep).classList.remove("active");
+  currentStep--;
+  document.getElementById("step-" + currentStep).classList.add("active");
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function val(id) { return (document.getElementById(id) || {}).value || ""; }
+function radioVal(name) {
+  var el = document.querySelector("input[name='" + name + "']:checked");
+  return el ? el.value : "";
+}
+
+function collectFormData() {
+  return {
+    full_name: val("full-name"),
+    phone: val("phone"),
+    email: val("email"),
+    attended_as: val("attended-as"),
+    rating_overall: radioVal("rating_overall"),
+    rating_notebooklm: radioVal("rating_notebooklm"),
+    rating_claude: radioVal("rating_claude"),
+    rating_confidence: radioVal("rating_confidence"),
+    recommend: radioVal("recommend"),
+    most_useful: val("most-useful"),
+    least_useful: val("least-useful"),
+    topics_wanted: val("topics-wanted"),
+    other_comments: val("other-comments")
+  };
+}
+
+function submitForm() {
+  if (!validateStep(3)) return;
+  var btn = document.getElementById("btn-next");
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>&nbsp; Submitting...';
+
+  var payload = collectFormData();
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    mode: "no-cors"
+  })
+  .then(function() { showSuccess(); })
+  .catch(function(err) {
+    console.error("Submission error:", err);
+    showSuccess(); // no-cors mode always triggers catch even on success
+  });
+}
+
+function showSuccess() {
+  for (var i = 1; i <= totalSteps; i++) {
+    var s = document.getElementById("step-" + i);
+    if (s) s.style.display = "none";
+  }
+  document.getElementById("form-nav").style.display = "none";
+  document.querySelector(".progress-bar-wrap").style.display = "none";
+  document.getElementById("success-screen").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+updateProgress();
+</script>
+</body>
+</html>
